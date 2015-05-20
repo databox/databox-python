@@ -16,6 +16,7 @@ When in Databox Designer go to Account > Access tokens, then either create a new
 
 Using the Databox Python library
 --------------------------------
+```python
 
     from databox import PushClient
 
@@ -33,5 +34,6 @@ Using the Databox Python library
 
     # get last push
     print client.lastPush()
-    
+```
+
 Check working sample in [sample1.py](/sample1.py) file
