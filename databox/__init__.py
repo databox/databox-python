@@ -22,7 +22,6 @@ class SingleClient(object):
         if self._token is None and token is not None:
             self._token = token
 
-
     def push(self, key, value, date=None):
         print "--- push --- ", self.token
         pass
