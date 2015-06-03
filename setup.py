@@ -1,8 +1,7 @@
+# -*- coding: utf-8 -*-
+
 import databox
 from setuptools import setup, find_packages
-
-install_requires = []
-install_requires.append('requests >= 2.7')
 
 setup(
     name=databox.__package_name__,
@@ -12,6 +11,9 @@ setup(
     description=databox.__description__,
     url=databox.__url__,
     license='MIT',
+
     packages=find_packages(exclude=('tests',)),
-    install_requires=install_requires
+    install_requires=[
+        'requests >= 2.7'
+    ]
 )
