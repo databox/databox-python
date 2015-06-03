@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-
-import databox
 from setuptools import setup, find_packages
 
 setup(
-    name=databox.__package_name__,
-    version=databox.__version__,
-    author=databox.__author__,
-    author_email=databox.__author_email__,
-    description=databox.__description__,
-    url=databox.__url__,
+    name="databox",
+    version="0.2.0",
+    author="Vlada Petrović",
+    author_email="support@databox.com",
+    description="Push metrics to Databox.",
+    url="https://github.com/databox/databox-python",
     license='MIT',
 
     packages=find_packages(exclude=('tests',)),

@@ -42,3 +42,7 @@ Check working sample in [sample1.py](/sample1.py) file.
 
 - [Vlada Petrović](https://github.com/VladaPetrovic)
 - [Oto Brglez](https://github.com/otobrglez)
+
+## Licence
+
+- [MIT](LICENSE.txt)
