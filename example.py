@@ -37,7 +37,5 @@ client.insert_all([
 
 
 from databox import push, insert_all, last_push
-
-token = '<access token>'
-push('sales.total', 1448.9, token=token)
-print last_push(token)
+push('sales.total', 1448.9, token=TOKEN)
+print last_push(TOKEN)
