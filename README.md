@@ -1,5 +1,7 @@
 # Databox bindings for Python
 
+[![Build Status](https://travis-ci.org/databox/databox-python.svg?branch=master)](https://travis-ci.org/databox/databox-python)
+
 ## Setup
 
 You can install this package by cloning this directory and running:
