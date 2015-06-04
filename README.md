@@ -63,6 +63,8 @@ Running test suite with unittest:
 
     python -munittest discover -p -t . 'test*' -v
 
+You can also check working [example.py](example.py).
+
 ## Authors and contributions
 
 - [Vlada Petrović](https://github.com/VladaPetrovic)
