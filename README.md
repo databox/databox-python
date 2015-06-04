@@ -6,7 +6,17 @@
 
 You can install this package by cloning this directory and running:
 
-   ```$ python setup.py install```
+```bash
+python setup.py install
+```
+
+You can also add following line to `requirements.txt`:
+
+````
+git+https://github.com/databox/databox-python.git
+````
+
+And run `pip install --upgrade -r requirements.txt`.
 
 ## Getting Databox access tokens
 
