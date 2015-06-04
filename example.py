@@ -18,3 +18,26 @@ for i, day in enumerate([date.today()-timedelta(days=d) for d in range(0, 14)]):
 
 if insert_all(rows, token=TOKEN):
     print "Inserted", len(rows), "rows."
+
+
+from databox import Client
+
+client = Client('<access token>')
+client.push('sales.total', 1447.0)
+client.push('orders.total', 32, date='2015-01-01 09:00:00')
+
+print client.last_push()
+
+client.insert_all([
+    {'key': 'temp.boston', 'value': 51},
+    {'key': 'temp.boston', 'value': 49, 'date': '2015-01-01 17:00:00'},
+    {'key': 'sales.total', 'value': 3000},
+])
+
+
+
+from databox import push, insert_all, last_push
+
+token = '<access token>'
+push('sales.total', 1448.9, token=token)
+print last_push(token)
