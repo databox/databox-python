@@ -41,25 +41,31 @@ class Client(object):
 
         return item
 
-    def _push_json(self, data={}):
+    def _push_json(self, data=None, path="/"):
+        if data is not None:
+            data = json_dumps(data)
+
         response = requests.post(
-            self.push_host,
+            self.push_host + path,
             auth=HTTPBasicAuth(self.push_token, ''),
             headers={'Content-Type': 'application/json'},
-            data=json_dumps(data)
+            data=data
         )
 
-        return response.json()['status'] == 'ok'
+        return response.json()
 
     def push(self, key, value, date=None):
         return self._push_json({
             'data': [self.process_kpi(key=key, value=value, date=date)]
-        })
+        })['status'] == 'ok'
 
     def insert_all(self, rows):
         return self._push_json({
             'data': [self.process_kpi(**row) for row in rows]
-        })
+        })['status'] == 'ok'
+
+    def last_push(self):
+        return self._push_json(path='/lastpushes/1')
 
 
 def push(key, value, date=None, token=None):
@@ -68,3 +74,7 @@ def push(key, value, date=None, token=None):
 
 def insert_all(rows=[], token=None):
     return Client(token).insert_all(rows)
+
+
+def last_push(token=None):
+    return Client(token).last_push()
