@@ -10,7 +10,7 @@ setup(
     url="https://github.com/databox/databox-python",
     license='MIT',
 
-    packages=find_packages(exclude=('tests',)),
+    packages=find_packages(exclude=('databox test',)),
     install_requires=[
         'requests >= 2.7'
     ]

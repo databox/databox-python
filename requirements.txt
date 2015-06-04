@@ -1,1 +1,1 @@
-requests >= 2.7
+requests[security] >= 2.7

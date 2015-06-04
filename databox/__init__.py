@@ -1,53 +1,70 @@
 import requests
+from requests.auth import HTTPBasicAuth
 from os import getenv
+from json import dumps as json_dumps
 
 
-class SingleClient(object):
-    _token = None
+class Client(object):
+    push_token = None
+    push_host = 'https://push2new.databox.com'
 
     class MissingToken(Exception):
         pass
 
-    @property
-    def token(self):
-        if self._token is None:
-            self._token = getenv("DATABOX_PUSH_TOKEN", None)
-
-        if self._token is None:
-            raise SingleClient.MissingToken("Missing Databox push token")
-
-        return self._token
-
-    def __init__(self, token=None):
-        if self._token is None and token is not None:
-            self._token = token
-
-    def push(self, key, value, date=None):
-        print "--- push --- ", self.token
+    class KPIValidationException(Exception):
         pass
 
-
-
-class Client(object):
-    _instance = None
-    client_instance = None
-
     def __init__(self, token=None):
-        self.client_instance = SingleClient(token)
+        self.push_token = token
+        if self.push_token is None:
+            self.push_token = getenv('DATABOX_PUSH_TOKEN', None)
 
-    def __new__(cls, *args, **kwargs):
-        if not cls._instance:
-            cls._instance = super(Client, cls). \
-                __new__(cls, *args, **kwargs)
-        return cls._instance
+        if self.push_token is None:
+            raise self.MissingToken('Push token is missing!')
 
-    @property
-    def client(self):
-        return self.client_instance
+        self.push_host = getenv('DATABOX_PUSH_HOST', self.push_host)
+
+    def process_kpi(self, **args):
+        key = args.get('key', None)
+        if key is None:
+            raise self.KPIValidationException('Missing "key"')
+
+        value = args.get('value', None)
+        if value is None:
+            raise self.KPIValidationException('Missing "value"')
+
+        item = {("$%s" % args['key']): args['value']}
+
+        date = args.get('date', None)
+        if date is not None:
+            item['date'] = date
+
+        return item
+
+    def _push_json(self, data={}):
+        response = requests.post(
+            self.push_host,
+            auth=HTTPBasicAuth(self.push_token, ''),
+            headers={'Content-Type': 'application/json'},
+            data=json_dumps(data)
+        )
+
+        return response.json()['status'] == 'ok'
 
     def push(self, key, value, date=None):
-        return self.client.push(key, value, date)
+        return self._push_json({
+            'data': [self.process_kpi(key=key, value=value, date=date)]
+        })
+
+    def insert_all(self, rows):
+        return self._push_json({
+            'data': [self.process_kpi(**row) for row in rows]
+        })
 
 
 def push(key, value, date=None, token=None):
-    return Client().push(key, value, date)
+    return Client(token).push(key, value, date)
+
+
+def insert_all(rows=[], token=None):
+    return Client(token).insert_all(rows)
