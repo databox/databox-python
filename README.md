@@ -10,7 +10,7 @@ You can install this package by cloning this directory and running:
 python setup.py install
 ```
 
-You can also add following line to `requirements.txt`:
+You can also add following line to `requirements.txt` and get latest master:
 
 ````
 git+https://github.com/databox/databox-python.git
@@ -51,7 +51,7 @@ Retriving information from last push with `last_push`:
 print client.last_push()
 ```
 
-Libary can be used with shorthand methods: 
+Libary can be used with shorthand methods:
 
 
 ```python
@@ -68,12 +68,17 @@ Using virtualenv:
     mkvirtualenv --no-site-packages databox-python
     workon databox-python
     pip install --upgrade -r requirements.txt
-    
+
 Running test suite with unittest:
 
     python -munittest discover -p -t . 'test*' -v
 
 You can also check working [example.py](example.py).
+
+## Examples and use-cases
+- [Simple Python example](example.py)
+- [Advanced Python example with MySQL](https://github.com/databox/databox-python-sql)
+- For general documentation and examples check [developers.databox.com](https://developers.databox.com)
 
 ## Authors and contributions
 
