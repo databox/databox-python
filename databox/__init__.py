@@ -7,6 +7,7 @@ from json import dumps as json_dumps
 class Client(object):
     push_token = None
     push_host = 'https://push2new.databox.com'
+    last_push_content = None
 
     class MissingToken(Exception):
         pass
@@ -58,15 +59,28 @@ class Client(object):
 
         return response.json()
 
-    def push(self, key, value, date=None):
-        return self._push_json({
-            'data': [self.process_kpi(key=key, value=value, date=date)]
-        })['status'] == 'ok'
+
+    def push(self, key, value, date=None, attributes=None):
+        self.last_push_content = self._push_json({
+            'data': [self.process_kpi(
+                key=key,
+                value=value,
+                date=date,
+                attributes=attributes
+            )]
+        })
+
+        return self.last_push_content['status'] == 'ok'
+
+
 
     def insert_all(self, rows):
-        return self._push_json({
+        self.last_push_content = self._push_json({
             'data': [self.process_kpi(**row) for row in rows]
-        })['status'] == 'ok'
+        })
+
+        return self.last_push_content['status'] == 'ok'
+
 
     def last_push(self, number=1):
         return self._push_json(path='/lastpushes/{n}'.format(**{'n': number}))
