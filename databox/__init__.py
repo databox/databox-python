@@ -39,6 +39,10 @@ class Client(object):
         if date is not None:
             item['date'] = date
 
+        attributes = args.get('attributes', None)
+        if attributes is not None:
+            item = dict(item.items() + attributes.items())
+
         return item
 
     def _push_json(self, data=None, path="/"):
