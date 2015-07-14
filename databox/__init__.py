@@ -7,6 +7,7 @@ from json import dumps as json_dumps
 class Client(object):
     push_token = None
     push_host = 'https://push2new.databox.com'
+    last_push_content = None
 
     class MissingToken(Exception):
         pass
@@ -39,6 +40,10 @@ class Client(object):
         if date is not None:
             item['date'] = date
 
+        attributes = args.get('attributes', None)
+        if attributes is not None:
+            item = dict(item.items() + attributes.items())
+
         return item
 
     def _push_json(self, data=None, path="/"):
@@ -54,18 +59,31 @@ class Client(object):
 
         return response.json()
 
-    def push(self, key, value, date=None):
-        return self._push_json({
-            'data': [self.process_kpi(key=key, value=value, date=date)]
-        })['status'] == 'ok'
+
+    def push(self, key, value, date=None, attributes=None):
+        self.last_push_content = self._push_json({
+            'data': [self.process_kpi(
+                key=key,
+                value=value,
+                date=date,
+                attributes=attributes
+            )]
+        })
+
+        return self.last_push_content['status'] == 'ok'
+
+
 
     def insert_all(self, rows):
-        return self._push_json({
+        self.last_push_content = self._push_json({
             'data': [self.process_kpi(**row) for row in rows]
-        })['status'] == 'ok'
+        })
 
-    def last_push(self):
-        return self._push_json(path='/lastpushes/1')
+        return self.last_push_content['status'] == 'ok'
+
+
+    def last_push(self, number=1):
+        return self._push_json(path='/lastpushes/{n}'.format(**{'n': number}))
 
 
 def push(key, value, date=None, token=None):
