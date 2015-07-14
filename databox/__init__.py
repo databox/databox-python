@@ -68,8 +68,8 @@ class Client(object):
             'data': [self.process_kpi(**row) for row in rows]
         })['status'] == 'ok'
 
-    def last_push(self):
-        return self._push_json(path='/lastpushes/1')
+    def last_push(self, number=1):
+        return self._push_json(path='/lastpushes/{n}'.format(**{'n': number}))
 
 
 def push(key, value, date=None, token=None):

@@ -49,6 +49,10 @@ class TestPush(unittest.TestCase):
 
         assert self.client.last_push()['err'] == []
 
+    def test_last_push_with_number(self):
+        self.client._push_json = lambda data=None, path='/': path
+        assert self.client.last_push(3) == '/lastpushes/3'
+
     def test_short(self):
         Client._push_json = mock_push_json
 

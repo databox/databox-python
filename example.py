@@ -37,5 +37,5 @@ print client.insert_all([
     }},
 ])
 
-print client.last_push()
+print client.last_push(3)
 
