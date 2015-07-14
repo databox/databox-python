@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="databox",
-    version="0.1.3",
+    version="0.1.4",
     author="Databox",
     author_email="support@databox.com",
     description="Push metrics to Databox.",
