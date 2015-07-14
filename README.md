@@ -34,6 +34,10 @@ from databox import Client
 client = Client('<access token>')
 client.push('sales.total', 1447.0)
 client.push('orders.total', 32, date='2015-01-01 09:00:00')
+client.push('orders.total', 34, attributes={
+  'something': 1447,
+})
+
 ```
 
 Inserting multiple matrices with one `insert_all`:
