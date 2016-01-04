@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup, find_packages
+from databox import __version__ as version
 
 setup(
     name="databox",
-    version="0.1.4",
+    version=version,
     author="Databox",
     author_email="support@databox.com",
-    description="Push metrics to Databox.",
+    description="Python wrapper for Databox - Mobile Executive Dashboard.",
     url="https://github.com/databox/databox-python",
     license='MIT',
     packages=find_packages(exclude=('databox test',)),

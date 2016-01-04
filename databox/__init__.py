@@ -3,6 +3,8 @@ from requests.auth import HTTPBasicAuth
 from os import getenv
 from json import dumps as json_dumps
 
+__version__ = "0.1.5"
+
 
 class Client(object):
     push_token = None
@@ -51,28 +53,28 @@ class Client(object):
             data = json_dumps(data)
 
         response = requests.post(
-            self.push_host + path,
-            auth=HTTPBasicAuth(self.push_token, ''),
-            headers={'Content-Type': 'application/json'},
-            data=data
+                self.push_host + path,
+                auth=HTTPBasicAuth(self.push_token, ''),
+                headers={
+                    'Content-Type': 'application/json',
+                    'User-Agent': "Databox/" + __version__ + " (Python)"
+                },
+                data=data
         )
 
         return response.json()
 
-
     def push(self, key, value, date=None, attributes=None):
         self.last_push_content = self._push_json({
             'data': [self.process_kpi(
-                key=key,
-                value=value,
-                date=date,
-                attributes=attributes
+                    key=key,
+                    value=value,
+                    date=date,
+                    attributes=attributes
             )]
         })
 
         return self.last_push_content['status'] == 'ok'
-
-
 
     def insert_all(self, rows):
         self.last_push_content = self._push_json({
@@ -80,7 +82,6 @@ class Client(object):
         })
 
         return self.last_push_content['status'] == 'ok'
-
 
     def last_push(self, number=1):
         return self._push_json(path='/lastpushes/{n}'.format(**{'n': number}))
