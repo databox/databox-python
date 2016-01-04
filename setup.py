@@ -9,6 +9,8 @@ setup(
     author_email="support@databox.com",
     description="Python wrapper for Databox - Mobile Executive Dashboard.",
     url="https://github.com/databox/databox-python",
+    download_url="https://github.com/databox/databox-python/tarball/"+version,
+    keywords=['databox', 'sdk', 'bi'],
     license='MIT',
     packages=find_packages(exclude=('databox test',)),
     install_requires=[
