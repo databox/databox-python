@@ -1,6 +1,7 @@
 # Databox bindings for Python
 
 [![Build Status](https://travis-ci.org/databox/databox-python.svg?branch=master)](https://travis-ci.org/databox/databox-python)
+[![PyPI version](https://badge.fury.io/py/databox.svg)](https://badge.fury.io/py/databox)
 
 ## Setup
 
