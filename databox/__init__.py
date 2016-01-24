@@ -3,7 +3,7 @@ from requests.auth import HTTPBasicAuth
 from os import getenv
 from json import dumps as json_dumps
 
-__version__ = "0.1.5"
+__version__ = "0.1.6"
 
 
 class Client(object):
