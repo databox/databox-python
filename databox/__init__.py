@@ -64,6 +64,18 @@ class Client(object):
 
         return response.json()
 
+    def _get_json(self, path):
+        response = requests.get(
+                self.push_host + path,
+                auth=HTTPBasicAuth(self.push_token, ''),
+                headers={
+                    'Content-Type': 'application/json',
+                    'User-Agent': "Databox/" + __version__ + " (Python)"
+                }
+        )
+
+        return response.json()
+
     def push(self, key, value, date=None, attributes=None):
         self.last_push_content = self._push_json({
             'data': [self.process_kpi(
@@ -84,7 +96,7 @@ class Client(object):
         return self.last_push_content['status'] == 'ok'
 
     def last_push(self, number=1):
-        return self._push_json(path='/lastpushes/{n}'.format(**{'n': number}))
+        return self._get_json(path='/lastpushes/{n}'.format(**{'n': number}))
 
 
 def push(key, value, date=None, token=None):

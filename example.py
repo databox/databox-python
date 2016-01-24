@@ -2,12 +2,13 @@
 from datetime import date, timedelta
 from random import randint
 from databox import insert_all
+from os import getenv
 
 """
 This example generates fake temperature KPIs for last 14 days and inserts them.
 """
 
-TOKEN = "adxg1kq5a4g04k0wk0s4wkssow8osw84"
+TOKEN = getenv("DATABOX_PUSH_TOKEN") or "adxg1kq5a4g04k0wk0s4wkssow8osw84"
 
 from databox import Client
 
@@ -27,7 +28,6 @@ client = Client(TOKEN)
 #
 #
 
-
 print client.insert_all([
     {'key': 'temp.boston', 'value': 51},
     {'key': 'temp.boston', 'value': 49, 'date': '2015-01-01 17:00:00'},
@@ -36,6 +36,8 @@ print client.insert_all([
         'price': 199
     }},
 ])
+
+print "--------"
 
 print client.last_push(3)
 

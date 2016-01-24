@@ -1,6 +1,7 @@
 import unittest
 from databox import *
 from pprint import pprint as pp
+from os import getenv
 
 
 def mock_push_json(data=None, path='/'):
@@ -9,7 +10,7 @@ def mock_push_json(data=None, path='/'):
 
 class TestPush(unittest.TestCase):
     def setUp(self):
-        self.databox_push_token = "adxg1kq5a4g04k0wk0s4wkssow8osw84"
+        self.databox_push_token = getenv("DATABOX_PUSH_TOKEN") or "adxg1kq5a4g04k0wk0s4wkssow8osw84"
         self.client = Client(self.databox_push_token)
 
         self.original_push_json = self.client._push_json
@@ -57,7 +58,7 @@ class TestPush(unittest.TestCase):
 
 
     def test_last_push(self):
-        self.client._push_json = lambda data=None, path='/': {
+        self.client._get_json = lambda path='/': {
             'err': [],
             'no_err': 0
         }
@@ -66,7 +67,7 @@ class TestPush(unittest.TestCase):
 
 
     def test_last_push_with_number(self):
-        self.client._push_json = lambda data=None, path='/': path
+        self.client._get_json = lambda data=None, path='/': path
         assert self.client.last_push(3) == '/lastpushes/3'
 
 
@@ -82,7 +83,7 @@ class TestPush(unittest.TestCase):
                               },
                           ], token=self.databox_push_token) is True
 
-        Client._push_json = lambda data=None, path='/': {
+        Client._get_json = lambda number=None, path='/': {
             'err': [],
             'no_err': 0
         }
