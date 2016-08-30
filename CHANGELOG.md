@@ -2,7 +2,13 @@
 Following guidelines of http://keepachangelog.com/
 
 ## [Unreleased]
-- update to support Databox API version 3
+
+## [2.0.0] - Aug 19, 2016
+- implement `GET /metrickeys`
+- update `GET /lastpushes`
+- implement `DELETE /data`
+- update `user-agent` and `Accept` request headers
+- update README
 
 ## [0.1.6] - Jan 24, 2016
 - Changes related to last_push
@@ -28,7 +34,8 @@ Following guidelines of http://keepachangelog.com/
 ## [0.1] - May 20, 2015
 - Initial release
 
-[Unreleased]: https://github.com/databox/databox-go/compare/0.1.6...master
+[Unreleased]: https://github.com/databox/databox-go/compare/2.0.0...master
+[2.0.0]: https://github.com/databox/databox-python/compare/0.1.6...2.0.0
 [0.1.6]: https://github.com/databox/databox-python/compare/0.1.5...0.1.6
 [0.1.5]: https://github.com/databox/databox-python/compare/0.1.4...0.1.5
 [0.1.4]: https://github.com/databox/databox-python/compare/0.1.1...0.1.4

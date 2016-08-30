@@ -13,8 +13,8 @@ TOKEN = getenv("DATABOX_PUSH_TOKEN") or "adxg1kq5a4g04k0wk0s4wkssow8osw84"
 from databox import Client
 
 client = Client(TOKEN)
-# client.push('sales.total', 1447.0)
-#client.push('orders.total', 32, date='2015-01-01 09:00:00')
+
+# client.push('orders.total', 32, date='2015-01-01 09:00:00')
 
 # key = 'temp.ljx'
 # rows = []
@@ -28,6 +28,8 @@ client = Client(TOKEN)
 #
 #
 
+push = client.push('transaction', 1447.4)
+
 print client.insert_all([
     {'key': 'temp.boston', 'value': 51},
     {'key': 'temp.boston', 'value': 49, 'date': '2015-01-01 17:00:00'},
@@ -35,9 +37,13 @@ print client.insert_all([
         'name': "Oto",
         'price': 199
     }},
+    {'key': 'transaction', 'value': 45.6, 'unit': 'USD'}
 ])
 
 print "--------"
 
-print client.last_push(3)
+lastPushes = client.last_push(3)
 
+print client.get_push(lastPushes[0]['response']['body']['id'])
+print client.metrics()
+print client.purge()
