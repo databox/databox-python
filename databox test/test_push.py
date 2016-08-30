@@ -5,7 +5,7 @@ from os import getenv
 
 
 def mock_push_json(data=None, path='/'):
-    return {'status': 'ok'}
+    return {'id': '2837643'}
 
 
 class TestPush(unittest.TestCase):
@@ -68,7 +68,7 @@ class TestPush(unittest.TestCase):
 
     def test_last_push_with_number(self):
         self.client._get_json = lambda data=None, path='/': path
-        assert self.client.last_push(3) == '/lastpushes/3'
+        assert self.client.last_push(3) == '/lastpushes?limit=3'
 
 
     def test_short(self):
