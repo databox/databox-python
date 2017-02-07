@@ -21,9 +21,7 @@ class TestPush(unittest.TestCase):
         assert self.client.push("templj", 12.0, date="2015-01-01 09:00:00") is True
 
     def test_push_with_attributes(self):
-        self.client._push_json = lambda data=None, path='/': dict({
-                                                                      'status': 'ok',
-                                                                  }.items() + data.items())
+        self.client._push_json = lambda data=None, path='/': data
 
         push = self.client.push("meta", 100, attributes={
             'n': 100

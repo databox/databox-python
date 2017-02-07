@@ -46,7 +46,7 @@ class Client(object):
 
         attributes = args.get('attributes', None)
         if attributes is not None:
-            item = dict(item.items() + attributes.items())
+            item.update(attributes)
 
         return item
 
