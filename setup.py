@@ -14,6 +14,6 @@ setup(
     license='MIT',
     packages=find_packages(exclude=('databox test',)),
     install_requires=[
-        'requests >= 2.7'
+        'requests >= 2.13'
     ]
 )
