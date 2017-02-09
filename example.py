@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from datetime import date, timedelta
 from random import randint
-from databox import insert_all
 from os import getenv
 
 """
@@ -14,23 +13,9 @@ from databox import Client
 
 client = Client(TOKEN)
 
-# client.push('orders.total', 32, date='2015-01-01 09:00:00')
-
-# key = 'temp.ljx'
-# rows = []
-#
-# for i, day in enumerate([date.today()-timedelta(days=d) for d in range(0, 14)]):
-#     n = 20 + randint(0, 15)
-#     rows.append({'key': key, 'value': n, 'date': day.strftime("%Y-%m-%d")})
-#
-# if insert_all(rows, token=TOKEN):
-#     print "Inserted", len(rows), "rows."
-#
-#
-
 push = client.push('transaction', 1447.4)
 
-print client.insert_all([
+pushId = client.insert_all([
     {'key': 'temp.boston', 'value': 51},
     {'key': 'temp.boston', 'value': 49, 'date': '2015-01-01 17:00:00'},
     {'key': 'sales.total', 'value': 3000, 'attributes': {
@@ -40,10 +25,11 @@ print client.insert_all([
     {'key': 'transaction', 'value': 45.6, 'unit': 'USD'}
 ])
 
-print "--------"
+print ("Push id: ", pushId)
 
-lastPushes = client.last_push(3)
+# lastPushes = client.last_push(3)
+# print lastPushes
 
-print client.get_push(lastPushes[0]['response']['body']['id'])
-print client.metrics()
-print client.purge()
+print (client.get_push(pushId))
+print (client.metrics())
+print (client.purge())
