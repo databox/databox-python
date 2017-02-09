@@ -104,14 +104,13 @@ class Client(object):
             )]
         })
 
-        return 'id' in self.last_push_content
+        return self.last_push_content['id']
 
     def insert_all(self, rows):
         self.last_push_content = self._push_json({
             'data': [self.process_kpi(**row) for row in rows]
         })
-
-        return 'id' in self.last_push_content
+        return self.last_push_content['id']
 
     def last_push(self, number=1):
         return self._get_json(path='/lastpushes?limit={n}'.format(**{'n': number}))
