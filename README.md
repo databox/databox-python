@@ -21,7 +21,7 @@ And run `pip install --upgrade -r requirements.txt`.
 
 ## Getting Databox access tokens
 
-When in Databox Designer go to Account > Access tokens, then either create a new token or get already existing one.
+When in Databox Designer go to Data Manager and create new connection. Select "Push custom data" and enter a connection name.
 
 ## Using the Databox Python library
 
