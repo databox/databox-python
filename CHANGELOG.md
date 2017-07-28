@@ -3,6 +3,9 @@ Following guidelines of http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [2.1.1] - July 28, 2017
+- Use setuptools_scm to extract version from Git
+
 ## [2.1.0] - Feb 10, 2017
 - Add support for python version 3.*
 
@@ -37,7 +40,8 @@ Following guidelines of http://keepachangelog.com/
 ## [0.1] - May 20, 2015
 - Initial release
 
-[Unreleased]: https://github.com/databox/databox-go/compare/2.1.0...master
+[Unreleased]: https://github.com/databox/databox-go/compare/2.1.1...master
+[2.1.1]: https://github.com/databox/databox-python/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/databox/databox-python/compare/2.0.0...2.1.0
 [2.0.0]: https://github.com/databox/databox-python/compare/0.1.6...2.0.0
 [0.1.6]: https://github.com/databox/databox-python/compare/0.1.5...0.1.6
