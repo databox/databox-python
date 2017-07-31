@@ -6,8 +6,8 @@ _name = "databox"
 _version = pkg_resources.get_distribution(_name).version
 
 setup(
-    use_scm_version=True,
-    setup_requires=['setuptools_scm'],
+    use_scm_version={'write_to': 'databox/_version.py'},
+    setup_requires=['setuptools_scm>1.5.4'],
     name=_name,
     version=_version,
     author="Databox",
