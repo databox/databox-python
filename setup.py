@@ -1,22 +1,25 @@
 # -*- coding: utf-8 -*-
-from setuptools import setup, find_packages
-import pkg_resources
+import os
 
-_name = "databox"
-_version = pkg_resources.get_distribution(_name).version
+from setuptools import setup, find_packages
+from codecs import open
+
+here = os.path.abspath(os.path.dirname(__file__))
+
+about = {}
+with open(os.path.join(here, 'databox', '__version__.py'), 'r', 'utf-8') as f:
+    exec(f.read(), about)
 
 setup(
-    use_scm_version={'write_to': 'databox/_version.py'},
-    setup_requires=['setuptools_scm>1.5.4'],
-    name=_name,
-    version=_version,
-    author="Databox",
-    author_email="support@databox.com",
-    description="Python wrapper for Databox - Mobile Executive Dashboard.",
-    url="https://github.com/databox/databox-python",
-    download_url="https://github.com/databox/databox-python/tarball/"+_version,
+    name=about['__title__'],
+    version=about['__version__'],
+    author=about['__author__'],
+    author_email=about['__author_email__'],
+    description=about['__description__'],
+    url=about['__url__'],
+    download_url=about['__url__'] + "/tarball/" + about['__version__'],
     keywords=['databox', 'sdk', 'bi'],
-    license='MIT',
+    license=about['__license__'],
     packages=find_packages(exclude=('databox test',)),
     install_requires=[
         'requests >= 2.13'

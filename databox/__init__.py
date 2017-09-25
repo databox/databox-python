@@ -1,12 +1,9 @@
 import requests
-import pkg_resources
 from requests.auth import HTTPBasicAuth
 from os import getenv
 from json import dumps as json_dumps
 
-_name = "databox"
-_version = pkg_resources.get_distribution(_name).version
-
+from .__version__ import __version__
 
 class Client(object):
     push_token = None
@@ -61,8 +58,8 @@ class Client(object):
                 auth=HTTPBasicAuth(self.push_token, ''),
                 headers={
                     'Content-Type': 'application/json',
-                    'User-Agent': 'databox-python/' + _version,
-                    'Accept': 'application/vnd.databox.v' + _version.split('.')[0] + '+json'
+                    'User-Agent': 'databox-python/' + __version__,
+                    'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
                 },
                 data=data
         )
@@ -75,8 +72,8 @@ class Client(object):
                 auth=HTTPBasicAuth(self.push_token, ''),
                 headers={
                     'Content-Type': 'application/json',
-                    'User-Agent': 'databox-python/' + _version,
-                    'Accept': 'application/vnd.databox.v' + _version.split('.')[0] + '+json'
+                    'User-Agent': 'databox-python/' + __version__,
+                    'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
                 }
         )
 
@@ -88,8 +85,8 @@ class Client(object):
                 auth=HTTPBasicAuth(self.push_token, ''),
                 headers={
                     'Content-Type': 'application/json',
-                    'User-Agent': 'databox-python/' + _version,
-                    'Accept': 'application/vnd.databox.v' + _version.split('.')[0] + '+json'
+                    'User-Agent': 'databox-python/' + __version__,
+                    'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
                 }
         )
 

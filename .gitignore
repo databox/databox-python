@@ -57,6 +57,3 @@ docs/_build/
 
 # PyBuilder
 target/
-
-# Version file
-databox/_version.py
