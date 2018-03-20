@@ -7,7 +7,7 @@ from os import getenv
 This example generates fake temperature KPIs for last 14 days and inserts them.
 """
 
-TOKEN = getenv("DATABOX_PUSH_TOKEN") or "adxg1kq5a4g04k0wk0s4wkssow8osw84"
+TOKEN = getenv("DATABOX_PUSH_TOKEN") or "your_token_1234321"
 
 from databox import Client
 

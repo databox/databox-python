@@ -11,7 +11,7 @@ def mock_push_json(data=None, path='/'):
 
 class TestPush(unittest.TestCase):
     def setUp(self):
-        self.databox_push_token = getenv("DATABOX_PUSH_TOKEN") or "adxg1kq5a4g04k0wk0s4wkssow8osw84"
+        self.databox_push_token = getenv("DATABOX_PUSH_TOKEN") or "your_token_1234321"
         self.client = Client(self.databox_push_token)
 
         self.original_push_json = self.client._push_json

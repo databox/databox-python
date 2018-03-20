@@ -17,7 +17,11 @@ You can also add following line to `requirements.txt` and get latest master:
 git+https://github.com/databox/databox-python.git
 ````
 
-And run `pip install --upgrade -r requirements.txt`.
+And run `pip install --upgrade -r requirements.txt`. Or just:
+
+```
+pip install databox
+```
 
 ## Getting Databox access tokens
 
