@@ -105,10 +105,15 @@ class Client(object):
 
         return self.last_push_content['id']
 
-    def insert_all(self, rows):
-        self.last_push_content = self._push_json({
+    def insert_all(self, rows, forcePush=None):
+        payload = {
             'data': [self.process_kpi(**row) for row in rows]
-        })
+        }
+
+        if isinstance(forcePush, bool) and forcePush:
+            payload['meta'] = {'ensure_unique': True}
+        self.last_push_content = self._push_json(payload)
+
         return self.last_push_content['id']
 
     def last_push(self, number=1):
