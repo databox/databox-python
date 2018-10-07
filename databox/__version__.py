@@ -1,5 +1,5 @@
 __title__ = 'databox'
-__version__ = '2.1.3'
+__version__ = '2.1.4'
 __description__ = 'Python wrapper for Databox - Mobile Executive Dashboard.'
 __url__ = 'https://github.com/databox/databox-python'
 __author__ = 'Databox'
