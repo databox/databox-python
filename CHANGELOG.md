@@ -3,6 +3,9 @@ Following guidelines of http://keepachangelog.com/
 
 ## [Unreleased]
 
+## [2.1.3] - Oct 7, 2018
+- add `forcePush` argument to `insert_all` function
+
 ## [2.1.2] - Sep 25, 2017
 - Release with fixed version
 
@@ -43,7 +46,8 @@ Following guidelines of http://keepachangelog.com/
 ## [0.1] - May 20, 2015
 - Initial release
 
-[Unreleased]: https://github.com/databox/databox-go/compare/2.1.2...master
+[Unreleased]: https://github.com/databox/databox-go/compare/2.1.3...master
+[2.1.3]: https://github.com/databox/databox-python/compare/2.1.2...2.1.3
 [2.1.2]: https://github.com/databox/databox-python/compare/2.1.1...2.1.2
 [2.1.1]: https://github.com/databox/databox-python/compare/2.1.0...2.1.1
 [2.1.0]: https://github.com/databox/databox-python/compare/2.0.0...2.1.0
