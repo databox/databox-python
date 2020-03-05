@@ -1,9 +1,8 @@
 import requests
-from requests.auth import HTTPBasicAuth
 from os import getenv
 from json import dumps as json_dumps
-
 from .__version__ import __version__
+
 
 class Client(object):
     push_token = None
@@ -54,62 +53,57 @@ class Client(object):
             data = json_dumps(data)
 
         response = requests.post(
-                self.push_host + path,
-                auth=HTTPBasicAuth(self.push_token, ''),
-                headers={
-                    'Content-Type': 'application/json',
-                    'User-Agent': 'databox-python/' + __version__,
-                    'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
-                },
-                data=data
+            self.push_host + path,
+            auth=requests.HTTPBasicAuth(self.push_token, ''),
+            headers={
+                'Content-Type': 'application/json',
+                'User-Agent': 'databox-python/' + __version__,
+                'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
+            },
+            data=data
         )
 
         return response.json()
 
     def _get_json(self, path):
         response = requests.get(
-                self.push_host + path,
-                auth=HTTPBasicAuth(self.push_token, ''),
-                headers={
-                    'Content-Type': 'application/json',
-                    'User-Agent': 'databox-python/' + __version__,
-                    'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
-                }
+            self.push_host + path,
+            auth=requests.HTTPBasicAuth(self.push_token, ''),
+            headers={
+                'Content-Type': 'application/json',
+                'User-Agent': 'databox-python/' + __version__,
+                'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
+            }
         )
 
         return response.json()
 
     def _delete_json(self, path):
         response = requests.delete(
-                self.push_host + path,
-                auth=HTTPBasicAuth(self.push_token, ''),
-                headers={
-                    'Content-Type': 'application/json',
-                    'User-Agent': 'databox-python/' + __version__,
-                    'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
-                }
+            self.push_host + path,
+            auth=requests.HTTPBasicAuth(self.push_token, ''),
+            headers={
+                'Content-Type': 'application/json',
+                'User-Agent': 'databox-python/' + __version__,
+                'Accept': 'application/vnd.databox.v' + __version__.split('.')[0] + '+json'
+            }
         )
 
         return response.json()
 
     def push(self, key, value, date=None, attributes=None, unit=None):
         self.last_push_content = self._push_json({
-            'data': [self.process_kpi(
-                    key=key,
-                    value=value,
-                    date=date,
-                    unit=unit,
-                    attributes=attributes
-            )]
-        })
+            'data': [self.process_kpi(key=key,
+                                      value=value,
+                                      date=date,
+                                      unit=unit,
+                                      attributes=attributes
+                                      )]})
 
         return self.last_push_content['id']
 
     def insert_all(self, rows, forcePush=None):
-        payload = {
-            'data': [self.process_kpi(**row) for row in rows]
-        }
-
+        payload = {'data': [self.process_kpi(**row) for row in rows]}
         if isinstance(forcePush, bool) and forcePush:
             payload['meta'] = {'ensure_unique': True}
         self.last_push_content = self._push_json(payload)
@@ -133,7 +127,10 @@ def push(key, value, date=None, attributes=None, unit=None, token=None):
     return Client(token).push(key, value, date, attributes, unit)
 
 
-def insert_all(rows=[], token=None):
+def insert_all(rows=None, token=None):
+    if rows is None:
+        rows = []
+
     return Client(token).insert_all(rows)
 
 
