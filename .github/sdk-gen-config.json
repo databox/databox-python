@@ -1,6 +1,6 @@
 {
   "packageName": "databox", 
-  "packageVersion": "{VERSION}",
+  "packageVersion": "0.0.1",
   "packageUrl": "https://github.com/databox/databox-python",
   "projectName": "databox-api"
 }
