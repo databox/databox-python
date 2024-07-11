@@ -5,6 +5,12 @@ on:
       - master
     paths:
       - 'src/**'
+
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
 jobs:
   release_draft:
     name: Create release draft
