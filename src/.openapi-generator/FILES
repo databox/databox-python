@@ -29,4 +29,9 @@ setup.cfg
 setup.py
 test-requirements.txt
 test/__init__.py
+test/test_api_response.py
+test/test_default_api.py
+test/test_push_data.py
+test/test_push_data_attribute.py
+test/test_state.py
 tox.ini
