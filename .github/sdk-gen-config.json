@@ -2,5 +2,5 @@
   "packageName": "databox", 
   "packageVersion": "{VERSION}",
   "packageUrl": "https://github.com/databox/databox-python",
-  "projectName": "databox-api"
+  "projectName": "databox"
 }
