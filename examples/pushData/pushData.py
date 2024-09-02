@@ -4,7 +4,7 @@ from pprint import pprint
 
 configuration = databox.Configuration(
     host = "https://push.databox.com",
-    username = "00d0a69a8be14b70a7e5c8de62b3b57d",
+    username = "<YOUR-CUSTOM-DATA-TOKEN>",
     password = ""
 )
 
