@@ -45,81 +45,36 @@ import databox
 
 Execute `pytest` to run the tests.
 
-## Getting Started
+## Basic example
 
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
 ```python
 
-import databox
-from databox.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://push.databox.com
-# See configuration.py for a list of all supported configuration parameters.
+# Configuration setup for the Databox API client
+# The API token is used as the username for authentication
+# It's recommended to store your API token securely, e.g., in an environment variable
 configuration = databox.Configuration(
-    host = "https://push.databox.com"
-)
+    host = "https://push.databox.com",
+    username = "<YOUR-CUSTOM-DATA-TOKEN>",
+    password = ""
+)      
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
+# It's crucial to specify the correct Accept header for the API request
+with databox.ApiClient(configuration, "Accept", "application/vnd.databox.v2+json",) as api_client:    
+    api_instance = databox.DefaultApi(api_client)    
 
-# Configure HTTP basic authorization: basicAuth
-configuration = databox.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-
-# Enter a context with an instance of the API client
-with databox.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = databox.DefaultApi(api_client)
+    # Define the data to be pushed to the Databox Push API# Prepare the data you want to push to Databox
+    # The 'key' should match a metric in your Databox account, 'value' is the data point, 'unit' is optional, and 'date' is the timestamp of the data point    
+    push_data = [{"key": "sales2", "value": 100, "unit": "USD", "date": "2021-01-01T00:00:00Z" }]
 
     try:
-        api_instance.data_delete()
+        api_instance.data_post(push_data=push_data)        
     except ApiException as e:
-        print("Exception when calling DefaultApi->data_delete: %s\n" % e)
-
+        # Handle exceptions that occur during the API call, such as invalid data or authentication issues
+        pprint("API Exception occurred: %s\n" % e)
+    except Exception as e:
+        # Handle any other unexpected exceptions
+        pprint("An unexpected error occurred: %s\n" % e)
+    
 ```
-
-## Documentation for API Endpoints
-
-All URIs are relative to *https://push.databox.com*
-
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*DefaultApi* | [**data_delete**](docs/DefaultApi.md#data_delete) | **DELETE** /data | 
-*DefaultApi* | [**data_metric_key_delete**](docs/DefaultApi.md#data_metric_key_delete) | **DELETE** /data/{metricKey} | 
-*DefaultApi* | [**data_post**](docs/DefaultApi.md#data_post) | **POST** /data | 
-*DefaultApi* | [**metrickeys_get**](docs/DefaultApi.md#metrickeys_get) | **GET** /metrickeys | 
-*DefaultApi* | [**metrickeys_post**](docs/DefaultApi.md#metrickeys_post) | **POST** /metrickeys | 
-*DefaultApi* | [**ping_get**](docs/DefaultApi.md#ping_get) | **GET** /ping | 
-
-
-## Documentation For Models
-
- - [ApiResponse](docs/ApiResponse.md)
- - [PushData](docs/PushData.md)
- - [PushDataAttribute](docs/PushDataAttribute.md)
- - [State](docs/State.md)
-
-
-<a id="documentation-for-authorization"></a>
-## Documentation For Authorization
-
-
-Authentication schemes defined for the API:
-<a id="basicAuth"></a>
-### basicAuth
-
-- **Type**: HTTP basic authentication
-
-
-## Author
-
-
-
-
